@@ -5,11 +5,11 @@
             <class name="com.thaonth.Bai25_ParallelExcution.EdgeTest"/>
             <class name="com.thaonth.Bai25_ParallelExcution.ChromeTest"/>
         </classes>
-    </test>
-    <test name="Demo Parallel Testing By Module Test 02">
-        <classes>
-            <class name="com.thaonth.Bai25_ParallelExcution.EdgeTest"/>
-            <class name="com.thaonth.Bai25_ParallelExcution.ChromeTest"/>
-        </classes>
-    </test>
+    </test>   <test name="Demo Parallel Testing By Module Test 02">
+    <classes>
+        <class name="com.thaonth.Bai25_ParallelExcution.EdgeTest"/>
+        <class name="com.thaonth.Bai25_ParallelExcution.ChromeTest"/>
+    </classes>
+</test>
+
 </suite>
