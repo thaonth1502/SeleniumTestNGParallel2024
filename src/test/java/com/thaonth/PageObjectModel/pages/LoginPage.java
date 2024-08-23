@@ -1,7 +1,8 @@
-package com.thaonth.Bai24_Parameter_MultiBrowser.pages;
+package com.thaonth.PageObjectModel.pages;
 
 import com.thaonth.constants.ConfigData;
 
+import com.thaonth.drivers.DriverManager;
 import com.thaonth.keywords.WebUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,16 +11,6 @@ import org.testng.Assert;
 import static com.thaonth.keywords.WebUI.*;
 
 public class LoginPage extends CommonPage {
-    // Khai báo driver cục bộ tỏng chính class này
-    private WebDriver driver;
-//    private WebDriverWait wait;
-
-    // Hàm xây dựng cho từng class page
-    public LoginPage(WebDriver driver){
-        super(driver);
-        this.driver = driver;//Nhận giá trị driver từ bên ngoài khi khởi tạo class
-        new WebUI(driver);
-    }
 
     //Khai báo các element dạng đối tượng By ( phương thức tìm kiếm)
     private By headerPage = By.xpath("//h1[normalize-space()='Login']");
@@ -50,13 +41,13 @@ public class LoginPage extends CommonPage {
         enterEmail(email);
         enterPassword(password);
         clickLoginButton();
-        return new DashboardPage(driver);
+        return new DashboardPage();
     }
 
     public void verifyLoginSuccess(){
         waitForPageLoaded();
         Assert.assertTrue(elementIsDisplay(menuDashboard), "\uD83D\uDC1E FAIL, Can not redirect to Dashboard page");
-        assertEquals(driver.getCurrentUrl(), "https://crm.anhtester.com/admin/", " \uD83D\uDC1E FAIL, The current URL is not matching");
+        assertEquals(DriverManager.getDriver().getCurrentUrl(), "https://crm.anhtester.com/admin/", " \uD83D\uDC1E FAIL, The current URL is not matching");
     }
 
     public void verifyLoginFail(String expectedMessage){

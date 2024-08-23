@@ -1,7 +1,7 @@
-package com.thaonth.Bai24_Parameter_MultiBrowser.testcases;
+package com.thaonth.PageObjectModel.testcases;
 
-import com.thaonth.Bai24_Parameter_MultiBrowser.pages.DashboardPage;
-import com.thaonth.Bai24_Parameter_MultiBrowser.pages.LoginPage;
+import com.thaonth.PageObjectModel.pages.DashboardPage;
+import com.thaonth.PageObjectModel.pages.LoginPage;
 import com.thaonth.common.BaseTest;
 import com.thaonth.constants.ConfigData;
 import org.testng.annotations.Test;
@@ -13,18 +13,18 @@ public class DashboardTest extends BaseTest {
 
     @Test (priority = 2)
     public void checkTotalQuickStatisticsSection(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.logInCRM(ConfigData.EMAIL, ConfigData.PASSWORD);
         dashboardPage.checkButtonDashboardOptions();
         dashboardPage.checkTotalInvoicesAwaitingPayment("4 / 5");
-        dashboardPage.checkTotalconvertedLeads("0 / 0");
+        dashboardPage.checkTotalconvertedLeads("1 / 2");
         dashboardPage.checkTotalProjectesInProgess("2 / 2");
-        dashboardPage.checkTotalTaskNotFinishes("0 / 0");
+        dashboardPage.checkTotalTaskNotFinishes("2 / 3");
     }
 
     @Test (priority = 1)
     public void checkQuickStatisticsSectionDisplay(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.logInCRM(ConfigData.EMAIL, ConfigData.PASSWORD);
 
         dashboardPage.clickButtonDashboardOptions();

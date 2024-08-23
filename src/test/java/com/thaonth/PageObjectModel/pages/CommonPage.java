@@ -1,16 +1,11 @@
-package com.thaonth.Bai24_Parameter_MultiBrowser.pages;
+package com.thaonth.PageObjectModel.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import com.thaonth.keywords.WebUI;
 
-public class CommonPage {
-    private WebDriver driver;
+import static com.thaonth.keywords.WebUI.*;
 
-    public CommonPage(WebDriver driver){
-        this.driver = driver;
-        new WebUI(driver);
-    }
+public class CommonPage {
 
     //Elements
     public By menuDashboard = By.xpath("//span[normalize-space()='Dashboard']");
@@ -21,20 +16,20 @@ public class CommonPage {
 
     public CustomerPage clickMenuCustomer(){
         WebUI.waitForPageLoaded();
-        WebUI.clickElement(menuCustomers);
-        return new CustomerPage(driver);
+        clickElement(menuCustomers);
+        return new CustomerPage();
     }
 
     public DashboardPage clickMenuDashboard(){
-        WebUI.waitForPageLoaded();
-        WebUI.clickElement(menuDashboard);
-        return new DashboardPage(driver);
+        waitForPageLoaded();
+        clickElement(menuDashboard);
+        return new DashboardPage();
     }
 
     public ProjectPage clickMenuProjects(){
-        WebUI.waitForPageLoaded();
-        WebUI.clickElement(menuProjects);
-        return new ProjectPage(driver);
+        waitForPageLoaded();
+        clickElement(menuProjects);
+        return new ProjectPage();
     }
 
 }
