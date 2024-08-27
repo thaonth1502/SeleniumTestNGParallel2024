@@ -1,4 +1,6 @@
 package com.thaonth.keywords;
+
+import static com.thaonth.constants.ConfigData.*;
 import com.thaonth.drivers.DriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -14,15 +16,8 @@ import java.util.List;
 
 
 public class WebUI {
-    
-    private static final int EXPLICIT_WAIT_TIMEOUT = 10;
-    private static final double STEP_TIME = 0;
-    private static final int PAGE_LOAD_TIMEOUT = 40;
-
-  
 
     //Wait for Element
-
     public static void waitForElementVisible(By by) {
         try {
             WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(EXPLICIT_WAIT_TIMEOUT), Duration.ofMillis(500));
