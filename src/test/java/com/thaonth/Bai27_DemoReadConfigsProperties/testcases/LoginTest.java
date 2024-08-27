@@ -7,43 +7,33 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    LoginPage loginPage;
-
     @Test
     public void testLoginSuccess(){
-        loginPage = new LoginPage();
-        loginPage.logInCRM(ConfigData.EMAIL, ConfigData.PASSWORD);
-        loginPage.verifyLoginSuccess();
+        getLoginPage().logInCRM(ConfigData.EMAIL, ConfigData.PASSWORD);
+        getLoginPage().verifyLoginSuccess();
     }
 
     @Test
     public void testLoginFailWithEmailInvalid(){
-        loginPage = new LoginPage();
-        loginPage.logInCRM("email@example.com", ConfigData.PASSWORD);
-        loginPage.verifyLoginFail("Invalid email or password");
+        getLoginPage().logInCRM("email@example.com", ConfigData.PASSWORD);
+        getLoginPage().verifyLoginFail("Invalid email or password");
     }
 
     @Test
     public void testLoginFailWithPasswordInvalid(){
-        loginPage = new LoginPage();
-
-        loginPage.logInCRM(ConfigData.EMAIL, "12345");
-        loginPage.verifyLoginFail("Invalid email or password");
+        getLoginPage().logInCRM(ConfigData.EMAIL, "12345");
+        getLoginPage().verifyLoginFail("Invalid email or password");
     }
 
     @Test
     public void testLoginFailWithEmailNull(){
-        loginPage = new LoginPage();
-
-        loginPage.logInCRM("", "123456");
-        loginPage.verifyLoginFail("The Email Address field is required.");
+        getLoginPage().logInCRM("", "123456");
+        getLoginPage().verifyLoginFail("The Email Address field is required.");
     }
 
     @Test
     public void testLoginFailWithPasswordNull(){
-        loginPage = new LoginPage();
-
-        loginPage.logInCRM("admin@example.com", "");
-        loginPage.verifyLoginFail("The Password field is required.");
+        getLoginPage().logInCRM("admin@example.com", "");
+        getLoginPage().verifyLoginFail("The Password field is required.");
     }
 }

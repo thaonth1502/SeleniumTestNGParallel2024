@@ -1,5 +1,9 @@
 package com.thaonth.common;
 
+import com.thaonth.Bai27_DemoReadConfigsProperties.pages.DashboardPage;
+import com.thaonth.Bai27_DemoReadConfigsProperties.pages.LoginPage;
+import com.thaonth.Bai27_DemoReadConfigsProperties.pages.ProjectPage;
+import com.thaonth.constants.ConfigData;
 import com.thaonth.drivers.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,19 +15,46 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 public class BaseTest {
-
+    WebDriver driver;
+    private LoginPage loginPage;
+    private DashboardPage dashboardPage;
+    private ProjectPage projectPage;
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void createDriver(@Optional("chrome") String browser) {
+    public void createDriver(@Optional("edge") String browser) {
+        if(ConfigData.BROWSER != null || !ConfigData.BROWSER.isEmpty()){
+            driver =  setupDriver(ConfigData.BROWSER);
+            System.out.println(ConfigData.BROWSER);
+            DriverManager.setDriver(driver);
+        }else {
+            driver = setupDriver(browser);
+            DriverManager.setDriver(driver);
+        }
+    }
 
-           WebDriver driver =  setupDriver(browser);
-           DriverManager.setDriver(driver);
+    public ProjectPage getProjectPage() {
+        if (projectPage == null){
+            projectPage = new ProjectPage();
+        }
+        return projectPage;
+    }
+
+    public LoginPage getLoginPage() {
+        if (loginPage == null){
+            loginPage = new LoginPage();
+        }
+        return loginPage;
+    }
+
+    public DashboardPage getDashboardPage() {
+        if (dashboardPage == null){
+            dashboardPage = new DashboardPage();
+        }
+        return dashboardPage;
     }
 
     public WebDriver setupDriver(String browserName) {
-
-        WebDriver driver;
 
         switch (browserName.trim().toLowerCase()) {
             case "chrome":

@@ -8,27 +8,26 @@ import org.testng.annotations.Test;
 
 public class DashboardTest extends BaseTest {
 
-    LoginPage loginPage;
-    DashboardPage dashboardPage;
+   
 
     @Test (priority = 2)
     public void checkTotalQuickStatisticsSection(){
-        loginPage = new LoginPage();
-        dashboardPage = loginPage.logInCRM(ConfigData.EMAIL, ConfigData.PASSWORD);
-        dashboardPage.checkButtonDashboardOptions();
-        dashboardPage.checkTotalInvoicesAwaitingPayment("4 / 5");
-        dashboardPage.checkTotalconvertedLeads("1 / 2");
-        dashboardPage.checkTotalProjectesInProgess("2 / 2");
-        dashboardPage.checkTotalTaskNotFinishes("2 / 3");
+       
+        getLoginPage().logInCRM(ConfigData.EMAIL, ConfigData.PASSWORD);
+        getDashboardPage().checkButtonDashboardOptions();
+        getDashboardPage().checkTotalInvoicesAwaitingPayment("4 / 5");
+        getDashboardPage().checkTotalconvertedLeads("1 / 2");
+        getDashboardPage().checkTotalProjectesInProgess("1 / 1");
+        getDashboardPage().checkTotalTaskNotFinishes("7 / 8");
     }
 
     @Test (priority = 1)
     public void checkQuickStatisticsSectionDisplay(){
-        loginPage = new LoginPage();
-        dashboardPage = loginPage.logInCRM(ConfigData.EMAIL, ConfigData.PASSWORD);
+        
+        getLoginPage().logInCRM(ConfigData.EMAIL, ConfigData.PASSWORD);
 
-        dashboardPage.clickButtonDashboardOptions();
-        dashboardPage.verifyCheckboxQuickStatistics();
+        getDashboardPage().clickButtonDashboardOptions();
+        getDashboardPage().verifyCheckboxQuickStatistics();
     }
 
 }

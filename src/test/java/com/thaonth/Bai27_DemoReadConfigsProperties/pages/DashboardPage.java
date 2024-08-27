@@ -3,10 +3,13 @@ package com.thaonth.Bai27_DemoReadConfigsProperties.pages;
 import com.thaonth.drivers.DriverManager;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import static com.thaonth.keywords.WebUI.*;
 
 public class DashboardPage extends CommonPage {
+
+    SoftAssert softAssert = new SoftAssert();
 
     private By  btn_DashboardOptions = By.xpath("//div[normalize-space()='Dashboard Options']");
     private By  totalInvoicesAwaitingPayment = By.xpath("(//span[normalize-space()='Invoices Awaiting Payment']/parent::div)/following-sibling::span");
@@ -30,26 +33,27 @@ public class DashboardPage extends CommonPage {
 
     public void checkTotalInvoicesAwaitingPayment(String expected_totalInvoicesAwaitingPayment){
         waitForPageLoaded();
-        Assert.assertTrue(checkElementExist(totalInvoicesAwaitingPayment), "The section Converted Leads is not display");
-        Assert.assertEquals(DriverManager.getDriver().findElement(totalInvoicesAwaitingPayment).getText(), expected_totalInvoicesAwaitingPayment, "FAIL! Total of Converted Leads is not equal");
+        softAssert.assertTrue(checkElementExist(totalInvoicesAwaitingPayment), "The section Converted Leads is not display");
+        softAssert.assertEquals(DriverManager.getDriver().findElement(totalInvoicesAwaitingPayment).getText(), expected_totalInvoicesAwaitingPayment, "FAIL! Total of Converted Leads is not equal");
     }
 
     public void checkTotalconvertedLeads(String expected_TotalConvertedLeads){
         waitForPageLoaded();
-        Assert.assertTrue(checkElementExist( totalConvertedLeads), "The section Invoices Awaiting Payment is not display");
-        Assert.assertEquals(DriverManager.getDriver().findElement(totalConvertedLeads).getText(), expected_TotalConvertedLeads, "FAIL! Total of Invoices Awaiting Payment is not equal");
+        softAssert.assertTrue(checkElementExist( totalConvertedLeads), "The section Invoices Awaiting Payment is not display");
+        softAssert.assertEquals(DriverManager.getDriver().findElement(totalConvertedLeads).getText(), expected_TotalConvertedLeads, "FAIL! Total of Invoices Awaiting Payment is not equal");
     }
 
     public void checkTotalProjectesInProgess(String expected_totalProjectsInProgress){
         waitForPageLoaded();
-        Assert.assertTrue(checkElementExist( totalProjectsInProgress), "The section Projects In Progress is not display");
-        Assert.assertEquals(DriverManager.getDriver().findElement(totalProjectsInProgress).getText(), expected_totalProjectsInProgress, "FAIL! Total of Projects In Progress is not equal");
+        softAssert.assertTrue(checkElementExist( totalProjectsInProgress), "The section Projects In Progress is not display");
+        softAssert.assertEquals(DriverManager.getDriver().findElement(totalProjectsInProgress).getText(), expected_totalProjectsInProgress, "FAIL! Total of Projects In Progress is not equal");
     }
 
     public void checkTotalTaskNotFinishes(String expected_totalTasksNotFinished){
         waitForPageLoaded();
-        Assert.assertTrue(checkElementExist(totalTasksNotFinished), "The section Task Not Finished is not display");
-        Assert.assertEquals(DriverManager.getDriver().findElement(totalTasksNotFinished).getText(), expected_totalTasksNotFinished, "FAIL! Total of Task Not Finished is not equal");
+        softAssert.assertTrue(checkElementExist(totalTasksNotFinished), "The section Task Not Finished is not display");
+        softAssert.assertEquals(DriverManager.getDriver().findElement(totalTasksNotFinished).getText(), expected_totalTasksNotFinished, "FAIL! Total of Task Not Finished is not equal");
+        softAssert.assertAll();
     }
 
     public void checkButtonDashboardOptions(){
