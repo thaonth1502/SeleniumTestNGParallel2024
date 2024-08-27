@@ -3,7 +3,6 @@
     <test name="Parallel Testing in POM" parallel="methods" >
         <classes>
             <class name="com.thaonth.Bai27_DemoReadConfigsProperties.testcases.LoginTest"/>
-            <class name="com.thaonth.Bai27_DemoReadConfigsProperties.testcases.DashboardTest"/>
         </classes>
     </test>
 </suite>

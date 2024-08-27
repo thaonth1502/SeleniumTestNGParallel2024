@@ -22,10 +22,9 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void createDriver(@Optional("edge") String browser) {
+    public void createDriver(@Optional("firefox") String browser) {
         if(ConfigData.BROWSER != null || !ConfigData.BROWSER.isEmpty()){
             driver =  setupDriver(ConfigData.BROWSER);
-            System.out.println(ConfigData.BROWSER);
             DriverManager.setDriver(driver);
         }else {
             driver = setupDriver(browser);

@@ -21,6 +21,8 @@ public class LoginPage extends CommonPage {
     private By errorMessage = By.xpath("//div[contains(@class,'alert alert-danger')]");
 
     private By menuDashboard = By.xpath("//span[normalize-space()='Dashboard']");
+    private By dropdownProfile = By.xpath("//li[contains(@class,'user-profile')]");
+    private By menuLogut = By.xpath("//a[text()='Logout']");
 
     //Khai báo các hàm xử lý thuộc trang Login
 
@@ -54,5 +56,10 @@ public class LoginPage extends CommonPage {
         waitForPageLoaded();
         Assert.assertTrue(elementIsDisplay(errorMessage), "\uD83D\uDC1E FAIL, The error message not display");
         assertEquals(getElementText(errorMessage), expectedMessage, "\uD83D\uDC1E FAIL, The content of error message is not matching" );
+    }
+
+    public void logout(){
+        clickElement(dropdownProfile);
+        clickElement(menuLogut);
     }
 }

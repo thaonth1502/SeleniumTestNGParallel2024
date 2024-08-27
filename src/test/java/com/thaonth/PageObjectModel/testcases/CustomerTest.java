@@ -3,6 +3,7 @@ package com.thaonth.PageObjectModel.testcases;
 import com.thaonth.PageObjectModel.pages.*;
 import com.thaonth.common.BaseTest;
 import com.thaonth.constants.ConfigData;
+import com.thaonth.helpers.ExcelHelper;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -18,15 +19,16 @@ public class CustomerTest extends BaseTest {
     @Test
 
     public void testAddNewCustomer() {
-        String CUSTOMER_NAME = "Customer 02";
+        ExcelHelper excelHelper = new ExcelHelper();
+        excelHelper.setExcelFile("src/test/resources/testData/Login.xlsx", "Customer");
+        String CUSTOMER_NAME = excelHelper.getCellData("CUSTOMER_NAME",2);
         loginPage = new LoginPage();
         dashboardPage = loginPage.logInCRM(ConfigData.EMAIL, ConfigData.PASSWORD);
-
         customerPage = loginPage.clickMenuCustomer();
         int totalCustomersBefore = Integer.parseInt(customerPage.getTotalCustomer());
         System.out.println("Total Customer Before: " + totalCustomersBefore);
         customerPage.clickAddNewButton();
-        customerPage.inputDataAddNewCustomerForm(CUSTOMER_NAME);
+        customerPage.inputDataAddNewCustomerForm(CUSTOMER_NAME, 2);
         customerPage.clickSaveButton();
         customerPage.checkCustomerInTableList(CUSTOMER_NAME);
         System.out.println("Total Customer After: " + customerPage.getTotalCustomer());

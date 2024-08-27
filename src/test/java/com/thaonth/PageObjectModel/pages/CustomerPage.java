@@ -1,6 +1,7 @@
 package com.thaonth.PageObjectModel.pages;
 
 import com.thaonth.drivers.DriverManager;
+import com.thaonth.helpers.ExcelHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
@@ -56,15 +57,17 @@ public class CustomerPage extends CommonPage {
 
     public void createNewCustomer(String customerName){
         clickAddNewButton();
-        inputDataAddNewCustomerForm(customerName);
+        inputDataAddNewCustomerForm(customerName,1);
         clickSaveButton();
     }
 
-    public void inputDataAddNewCustomerForm(String customerName){
-       inputElement(inputCompany, customerName);
-       inputElement(inpVat, "10");
-       inputElement(inputWebsite, "htts://anhtester.com");
-       inputElement(inputPhone, "023456789");
+    public void inputDataAddNewCustomerForm(String customerName, int row){
+        ExcelHelper excelHelper = new ExcelHelper();
+        excelHelper.setExcelFile("src/test/resources/testData/Login.xlsx", "Customer");
+       inputElement(inputCompany, excelHelper.getCellData("CUSTOMER_NAME", row));
+       inputElement(inpVat, excelHelper.getCellData("VAT", row));
+       inputElement(inputWebsite, excelHelper.getCellData("WEBSITE", row));
+       inputElement(inputPhone, excelHelper.getCellData("PHONE", row));
        clickElement(dropdownGroup);
        sleep(1);
        inputElement(inputGroup, "VIP");
@@ -76,7 +79,7 @@ public class CustomerPage extends CommonPage {
         sleep(1);
         setKeys(inputCurrency, Keys.ENTER);
         clickElement(dropdownCurrency);
-        selectLanguage("Vietnamese");
+        selectLanguage(excelHelper.getCellData("LANGUAGE", row));
         inputElement(inputCity, "Hanoi");
         inputElement(inputStage, "Caugiay");
         inputElement(inputCode, "100000");
@@ -114,7 +117,7 @@ public class CustomerPage extends CommonPage {
         sleep(1);
         clickElement(firstItemCustomerName);
         clearDateInCustomerForm();
-        inputDataAddNewCustomerForm(newCustomerName);
+        inputDataAddNewCustomerForm(newCustomerName, 1);
         clickElement(btnSaveEditForm);
     }
 
@@ -131,11 +134,13 @@ public class CustomerPage extends CommonPage {
     }
     public void checkCustomerDetail(String customerName){
         //Check customer detail in customer page
+        ExcelHelper excelHelper = new ExcelHelper();
+        excelHelper.setExcelFile("src/test/resources/testData/Login.xlsx", "Customer");
         clickElement(firstItemCustomerName);
         Assert.assertEquals(getElementAttribute(inputCompany,"value" ),customerName, "FAIL!!! The Customer Name not match");
-        Assert.assertEquals(getElementAttribute(inpVat,"value"),"10", "FAIL!!! The VAT not match");
-        Assert.assertEquals(getElementAttribute(inputWebsite,"value"),"htts://anhtester.com", "FAIL!!! The website not match");
-        Assert.assertEquals(getElementAttribute(inputPhone,"value"),"023456789", "FAIL!!! The Phone number not match");
+        Assert.assertEquals(getElementAttribute(inpVat,"value"),excelHelper.getCellData("VAT", 1), "FAIL!!! The VAT not match");
+        Assert.assertEquals(getElementAttribute(inputWebsite,"value"),excelHelper.getCellData("WEBSITE", 1), "FAIL!!! The website not match");
+        Assert.assertEquals(getElementAttribute(inputPhone,"value"),excelHelper.getCellData("PHONE", 1), "FAIL!!! The Phone number not match");
         Assert.assertEquals(getElementAttribute(dropdownGroup,"title"),"VIP", "FAIL!!! The Group not match");
         Assert.assertEquals(getElementAttribute(dropdownCurrency,"title"),"USD", "FAIL!!! The Currency not match");
         Assert.assertEquals(getElementAttribute(inputCity,"value"),"Hanoi" , "FAIL!!! The city not match");
