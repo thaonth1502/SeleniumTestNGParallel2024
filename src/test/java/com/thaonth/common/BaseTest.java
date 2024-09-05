@@ -3,6 +3,7 @@ package com.thaonth.common;
 import com.thaonth.Bai27_DemoReadConfigsProperties.pages.DashboardPage;
 import com.thaonth.Bai27_DemoReadConfigsProperties.pages.LoginPage;
 import com.thaonth.Bai27_DemoReadConfigsProperties.pages.ProjectPage;
+import com.thaonth.Bai29_DataProvider.pages.CustomerPage;
 import com.thaonth.constants.ConfigData;
 import com.thaonth.drivers.DriverManager;
 import org.openqa.selenium.WebDriver;
@@ -19,10 +20,11 @@ public class BaseTest {
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
     private ProjectPage projectPage;
+    private CustomerPage customerPage;
 
     @BeforeMethod
     @Parameters({"browser"})
-    public void createDriver(@Optional("firefox") String browser) {
+    public void createDriver(@Optional("chrome") String browser) {
         if(ConfigData.BROWSER != null || !ConfigData.BROWSER.isEmpty()){
             driver =  setupDriver(ConfigData.BROWSER);
             DriverManager.setDriver(driver);
@@ -30,6 +32,13 @@ public class BaseTest {
             driver = setupDriver(browser);
             DriverManager.setDriver(driver);
         }
+    }
+
+    public CustomerPage getCustomerPage() {
+        if (customerPage == null){
+            customerPage = new CustomerPage();
+        }
+        return customerPage;
     }
 
     public ProjectPage getProjectPage() {
