@@ -3,7 +3,6 @@ package com.thaonth.Bai29_DataProvider.pages;
 import com.thaonth.keywords.WebUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 
@@ -31,6 +30,11 @@ public class CustomerPage extends CommonPage {
     By alertMessage = By.xpath("//span[@class='alert-title']");
     By totalCustomer = By.xpath("//span[normalize-space() = 'Total Customers']/preceding-sibling::span");
 
+    public void addNewCustomerSuccess(){
+        clickAddNewButton();
+        inputDataAddNewCustomerForm("name");
+        clickSaveButton();
+    }
 
     //Ham xư ly cho Customer Page
     public String getTotalCustomer(){

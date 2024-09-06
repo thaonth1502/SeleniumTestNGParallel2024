@@ -3,6 +3,7 @@ package com.thaonth.Bai29_DataProvider.testcases;
 import com.thaonth.Bai29_DataProvider.pages.*;
 import com.thaonth.common.BaseTest;
 import com.thaonth.constants.ConfigData;
+import com.thaonth.helpers.ExcelHelper;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -13,14 +14,16 @@ public class CustomerTest extends BaseTest {
     @Parameters({"customerName"})
     public void testAddNewCustomer(String customerName){
         String CUSTOMER_NAME = customerName;
-        getLoginPage().logInCRM(ConfigData.EMAIL, ConfigData.PASSWORD);
+        ExcelHelper excelHelper = new ExcelHelper();
+        excelHelper.setExcelFile("src/test/resources/testData/DataExcel.xlsx","LoginDataProvider");
 
+        //Get simple data from Excel
+        getLoginPage().logInCRM(excelHelper.getCellData("EMAIL", 1), excelHelper.getCellData("PASSWORD", 1));
         getLoginPage().clickMenuCustomer();
+
         int totalCustomersBefore = Integer.parseInt(getCustomerPage().getTotalCustomer());
         System.out.println("Total Customer Before: " + totalCustomersBefore);
-        getCustomerPage().clickAddNewButton();
-        getCustomerPage().inputDataAddNewCustomerForm(CUSTOMER_NAME);
-        getCustomerPage().clickSaveButton();
+        getCustomerPage().addNewCustomerSuccess();
         getCustomerPage().checkCustomerInTableList(CUSTOMER_NAME);
         System.out.println("Total Customer After: " + getCustomerPage().getTotalCustomer());
         Assert.assertEquals(getCustomerPage().getTotalCustomer(), String.valueOf(totalCustomersBefore + 1), "FAIL!! The total customer in Dashboard not match");
